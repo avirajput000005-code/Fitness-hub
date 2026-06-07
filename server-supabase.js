@@ -35,14 +35,6 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Config Endpoint for client-side Supabase client initialization
-app.get('/api/config', (req, res) => {
-    res.json({
-        supabaseUrl: process.env.SUPABASE_URL,
-        supabaseKey: process.env.SUPABASE_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY
-    });
-});
-
 // Auth Routes
 app.post('/api/auth/register', async (req, res) => {
     try {

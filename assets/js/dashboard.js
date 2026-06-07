@@ -43,78 +43,11 @@ window.dashboardState = {
     isInitialized: false
 };
 
-async function syncGoogleSession() {
-    if (typeof supabase === 'undefined') return false;
-    try {
-        // Fetch Supabase configuration values dynamically
-        const res = await fetch('/api/config');
-        const config = await res.json();
-        if (!config.supabaseUrl || !config.supabaseKey) return false;
-        
-        const client = supabase.createClient(config.supabaseUrl, config.supabaseKey);
-        
-        // Check if a session exists (handles parses from URL hash after redirect)
-        const { data: { session }, error } = await client.auth.getSession();
-        if (error) throw error;
-        
-        if (session && session.user) {
-            const googleEmail = session.user.email;
-            const googleName = session.user.user_metadata?.full_name || session.user.user_metadata?.name || googleEmail.split('@')[0];
-            
-            console.log('🔗 Found active Supabase OAuth session for:', googleEmail);
-            
-            // Check if this user exists in our local Express backend database
-            const profileResponse = await apiGetProfile(googleEmail);
-            
-            if (profileResponse.success && profileResponse.user) {
-                // User exists - check their payment status
-                const status = await apiGetPaymentStatus(googleEmail);
-                
-                // Establish local session
-                localStorage.setItem('fitnesshub_session', JSON.stringify({
-                    email: googleEmail,
-                    loginTime: new Date().toISOString(),
-                    rememberMe: true,
-                    otpVerified: true
-                }));
-                
-                if (!status.hasPaid) {
-                    console.log('⚠️ Registered but unpaid user - redirecting to payment page');
-                    window.location.href = 'payment.html';
-                    return true;
-                }
-                
-                return false; // Paid user, stay on dashboard.html
-            } else {
-                // User does not exist in our custom public users table yet - redirect to registration
-                console.log('🆕 Google User is new. Redirecting to registration page to collect details...');
-                
-                // Sign out of Supabase auth state so we don't automatically trigger this check again
-                await client.auth.signOut();
-                
-                // Redirect to register
-                window.location.href = `register.html?google_email=${encodeURIComponent(googleEmail)}&google_name=${encodeURIComponent(googleName)}`;
-                return true;
-            }
-        }
-    } catch (e) {
-        console.error('⚠️ Google session sync error:', e.message);
-    }
-    return false;
-}
 
 // Initialize Dashboard
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         console.log('🚀 Initializing dashboard...');
-        
-        // Sync Google session if redirecting from OAuth
-        const redirected = await syncGoogleSession();
-        if (redirected) {
-            console.log('🔄 Redirected by OAuth session sync - halting dashboard initialization');
-            return;
-        }
-        
         // Check for session locally (offline-first)
         const session = localStorage.getItem('fitnesshub_session');
         
