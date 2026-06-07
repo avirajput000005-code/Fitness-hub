@@ -1,0 +1,421 @@
+/* Kinetic Brutalism - Auth Styles */
+
+/* Base overrides for auth layouts */
+.auth-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--bg-base);
+    padding: 100px 20px 20px 20px; /* Leave space for possible nav */
+    position: relative;
+    overflow: hidden;
+}
+
+.login-page-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--bg-base);
+    padding: 20px;
+}
+
+/* Brutalist Auth Layout for Register / Admin */
+.auth-card {
+    background-color: var(--bg-surface);
+    padding: 3rem;
+    border: 3px solid var(--border-color); /* No radius, hard border */
+    box-shadow: 15px 15px 0px var(--accent); /* Brutalist shadow */
+    transition: all 0.3s ease;
+}
+
+.auth-card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 20px 20px 0px var(--accent);
+}
+
+.auth-card h2, .login-header h2 {
+    color: var(--text-main);
+    font-size: 2.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.05em;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Login specific layout (split panel) */
+.login-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    background-color: var(--bg-surface);
+    border: 3px solid var(--border-color);
+    box-shadow: 15px 15px 0px var(--accent);
+    min-height: 500px;
+    transition: all 0.3s ease;
+}
+
+.login-wrapper:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 20px 20px 0px var(--accent);
+}
+
+.login-left {
+    flex: 1;
+    background-color: var(--accent);
+    color: var(--bg-base); /* Inverted text for lime background */
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 3px solid var(--border-color);
+}
+
+.login-left-icon i {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-left h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--bg-base);
+}
+
+.login-features .feature-item {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.login-right {
+    flex: 1;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--bg-surface);
+}
+
+/* Form Styles */
+.form-label, .form-group label {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-main);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-control, .form-group input {
+    background-color: var(--bg-base);
+    border: 2px solid var(--border-color);
+    color: var(--text-main);
+    padding: 1rem;
+    border-radius: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.form-control:focus, .form-group input:focus {
+    background-color: var(--bg-surface-elevated);
+    border-color: var(--accent);
+    box-shadow: none;
+    outline: none;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-text {
+    color: var(--text-muted);
+}
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Step Form (Register) */
+.form-step {
+    display: none;
+}
+.form-step.active {
+    display: block;
+}
+.step-title {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text-main);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* Generic Buttons - brutalist */
+.btn-success, .btn-login {
+    background-color: var(--accent) !important;
+    color: var(--bg-base) !important;
+    border: 2px solid var(--border-color) !important;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    padding: 1rem;
+    border-radius: 0 !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.btn-success:hover, .btn-login:hover {
+    background-color: #A3CC00 !important;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0px var(--border-color);
+}
+
+.btn-outline-success {
+    background-color: transparent !important;
+    color: var(--accent) !important;
+    border: 2px solid var(--accent) !important;
+    border-radius: 0 !important;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.btn-outline-success:hover {
+    background-color: var(--accent) !important;
+    color: var(--bg-base) !important;
+}
+
+/* Links */
+.login-link a, .forgot-link, .signup-section a {
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.login-link a:hover, .forgot-link:hover, .signup-section a:hover {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    text-decoration: none;
+}
+
+.signup-section {
+    text-align: center;
+    color: var(--text-muted);
+}
+
+/* Plan Selection */
+.plan-option {
+    background-color: var(--bg-base);
+    border: 2px solid var(--border-color);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.plan-option.selected {
+    border-color: var(--accent);
+    box-shadow: 4px 4px 0px var(--accent);
+}
+
+.plan-badge-select {
+    display: inline-block;
+    background-color: var(--border-color);
+    color: var(--text-main);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.plan-badge-select.popular {
+    background-color: var(--accent);
+    color: var(--bg-base);
+}
+
+.plan-price-select {
+    color: var(--text-main);
+    font-size: 1.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.plan-list-select {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.plan-list-select li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.plan-list-select i {
+    color: var(--accent);
+    margin-right: 0.5rem;
+}
+.plan-list-select .fa-times {
+    color: #ef4444;
+}
+
+/* Selected Plan Info */
+#selectedPlanInfo {
+    margin-bottom: 1.5rem;
+}
+
+/* OTP Specific */
+#otpInput {
+    font-size: 2rem;
+    text-align: center;
+    letter-spacing: 0.5em;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    padding: 1rem;
+}
+
+.otp-timer {
+    text-align: center;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.otp-resend {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+}
+
+.otp-resend button {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+.otp-resend button:hover {
+    color: var(--accent);
+}
+
+/* Alerts */
+.alert {
+    border-radius: 0;
+    border: 2px solid;
+    padding: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+.alert-info { border-color: #3b82f6; background-color: rgba(59, 130, 246, 0.1); color: #60a5fa; }
+.alert-success { border-color: var(--accent); background-color: rgba(204, 255, 0, 0.1); color: var(--accent); }
+.alert-danger { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.1); color: #f87171; }
+
+/* Success container */
+.success-container {
+    text-align: center;
+}
+.success-icon {
+    font-size: 4rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+.success-details {
+    background-color: var(--bg-base);
+    border: 2px solid var(--border-color);
+    padding: 1rem;
+    text-align: left;
+    margin: 1.5rem 0;
+}
+.success-next-steps {
+    background-color: var(--bg-base);
+    border: 2px solid var(--border-color);
+    padding: 1rem;
+    text-align: left;
+    margin: 1.5rem 0;
+}
+.success-next-steps ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.success-next-steps li {
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .login-wrapper { flex-direction: column; box-shadow: none; border: none; }
+    .login-left { border-right: none; border-bottom: 3px solid var(--border-color); padding: 2rem; }
+    .login-right { padding: 2rem; }
+}
+
+/* ─── Utility helpers (replaces inline styles) ─── */
+
+/* JS-toggled hidden step (display:none) */
+.hidden-step { display: none; }
+
+/* Feature icon — large, colored */
+.icon-feature-lg {
+    font-size: 40px;
+    color: #28a745;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Floating Back to Home Button */
+.floating-back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: var(--bg-surface);
+    color: var(--text-main);
+    border: 2px solid var(--border-color);
+    padding: 0.75rem 1.25rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1000;
+    transition: all 0.2s ease;
+}
+
+.floating-back-btn:hover {
+    background-color: var(--accent);
+    color: var(--bg-base);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0px var(--border-color);
+    text-decoration: none;
+}
+
+

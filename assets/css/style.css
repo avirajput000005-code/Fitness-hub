@@ -1,0 +1,678 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700;900&display=swap');
+
+:root {
+    /* Eye-Friendly Deep Slate/Blue-Grey base — reduces contrast-induced strain */
+    --bg-base:             #0f172a; /* Deep Slate 950 */
+    --bg-surface:          #1e293b; /* Slate 800 */
+    --bg-surface-elevated: #334155; /* Slate 700 */
+    --bg-card:             #1e293b;
+
+    /* Balanced Cyan-Blue accent — much more soothing than neon orange */
+    --accent:              #22d3ee; /* Balanced Cyan */
+    --accent-hover:        #0891b2; /* Darker Cyan for interaction */
+    --accent-glow:         rgba(34, 211, 238, 0.15);
+
+    /* Secondary Soft Indigo highlight */
+    --accent-2:            #818cf8; /* Soft Indigo */
+    --accent-2-glow:       rgba(129, 140, 248, 0.15);
+
+    /* Softer Gradients with less saturation */
+    --gradient-hero:       linear-gradient(135deg, #0f172a 0%, #172554 100%);
+    --gradient-card:       linear-gradient(145deg, #1e293b, #0f172a);
+    --gradient-accent:     linear-gradient(135deg, #22d3ee, #6366f1);
+    --gradient-cta:        linear-gradient(135deg, #22d3ee 0%, #6366f1 50%, #4f46e5 100%);
+    --gradient-border:     linear-gradient(135deg, rgba(34,211,238,0.4), rgba(129,140,248,0.3));
+
+    /* Text — Off-white/Slate-cool for readability (less 'bright' than pure white) */
+    --text-main:           #e2e8f0; /* Soft Slate 200 */
+    --text-muted:          #94a3b8; /* Slate 400 */
+    --text-inverse:        #0f172a;
+
+    --danger:              #f43f5e; /* Rose 500 (softer than harsh red) */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-base);
+    background-image: 
+        radial-gradient(ellipse at 20% 50%, rgba(34, 211, 238, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 10%, rgba(129, 140, 248, 0.06) 0%, transparent 40%),
+        radial-gradient(ellipse at 60% 80%, rgba(30, 41, 59, 0.05) 0%, transparent 40%);
+    color: var(--text-main);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand, .plan-price .amount {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+}
+
+/* Universal clear styles to override bootstrap border radius */
+.btn, .form-control, .card, .navbar, .badge, .rounded, .rounded-circle {
+    border-radius: 0 !important;
+}
+
+/* Navbar Styling */
+.navbar-custom {
+    background-color: rgba(11, 13, 26, 0.85);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 107, 53, 0.15);
+    padding: 20px 0;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-brand {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--text-main) !important;
+    letter-spacing: -0.05em;
+    transition: color 0.2s;
+}
+
+.navbar-brand i {
+    color: var(--accent);
+    margin-right: 8px;
+}
+
+.navbar-brand:hover {
+    color: var(--accent) !important;
+}
+
+.nav-link {
+    color: var(--text-muted) !important;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 14px;
+    margin-left: 32px;
+    transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-main) !important;
+}
+
+.btn-register {
+    background-color: var(--accent) !important;
+    color: var(--text-inverse) !important;
+    padding: 12px 32px !important;
+    transition: transform 0.2s, background-color 0.2s;
+    margin-left: 32px;
+}
+
+.btn-register:hover {
+    background-color: var(--accent-hover) !important;
+    transform: translateY(-4px);
+}
+
+/* Hero Section */
+.hero-section {
+    background: var(--gradient-hero);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.12) 0%, transparent 70%);
+    animation: pulse-glow 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+    animation: pulse-glow 8s ease-in-out infinite reverse;
+    pointer-events: none;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+.hero-title {
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 900;
+    line-height: 0.9;
+    margin-bottom: 32px;
+    color: var(--text-main);
+}
+
+.hero-title span {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    color: var(--text-muted);
+    margin-bottom: 48px;
+    max-width: 600px;
+}
+
+.btn-success {
+    background-color: var(--accent) !important;
+    color: var(--text-inverse) !important;
+    border: none !important;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    padding: 20px 48px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 16px;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-success:hover {
+    background-color: var(--accent-hover) !important;
+    transform: translateY(-4px);
+}
+
+.btn-outline-success {
+    background-color: transparent !important;
+    color: var(--text-main) !important;
+    border: none !important;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    padding: 20px 48px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-outline-success::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--bg-surface-elevated);
+    z-index: -1;
+    transition: transform 0.2s ease;
+    transform-origin: left;
+}
+
+.btn-outline-success:hover::before {
+    transform: scaleX(1.05);
+    background-color: var(--bg-base);
+}
+
+.btn-outline-success:hover {
+    color: var(--accent) !important;
+}
+
+.hero-image-box {
+    font-size: 400px;
+    color: var(--bg-base);
+    line-height: 1;
+}
+
+/* Common Section Layouts */
+.features-section, .trainers-section {
+    padding: 120px 0;
+    background-color: var(--bg-base);
+    background-image: radial-gradient(ellipse at 50% 0%, rgba(123, 47, 247, 0.06) 0%, transparent 60%);
+}
+
+.plans-section, .bmi-section {
+    padding: 120px 0;
+    background-color: var(--bg-surface);
+    background-image: radial-gradient(ellipse at 80% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 60%);
+}
+
+.section-header {
+    text-align: left;
+    margin-bottom: 80px;
+    max-width: 800px;
+}
+
+.section-header h2 {
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 24px;
+    color: var(--text-main);
+}
+
+.section-header p {
+    font-size: 20px;
+    color: var(--text-muted);
+}
+
+/* Feature Cards */
+.feature-card {
+    background: var(--gradient-card);
+    padding: 48px 40px;
+    height: 100%;
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    transition: background 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gradient-accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.feature-card:hover {
+    background: linear-gradient(145deg, #181d3a, #1f2550);
+    border-color: rgba(255, 107, 53, 0.3);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(123, 47, 247, 0.15);
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+.feature-icon {
+    font-size: 48px;
+    color: var(--accent);
+    margin-bottom: 32px;
+}
+
+.feature-card h5 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: var(--text-main);
+}
+
+.feature-card p {
+    color: var(--text-muted);
+}
+
+/* Plans Section */
+.plan-card {
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    padding: 56px 48px;
+    height: 100%;
+    text-align: left;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.plan-card:hover {
+    border-color: rgba(255, 107, 53, 0.35);
+    box-shadow: 0 16px 50px rgba(255, 107, 53, 0.1);
+    transform: translateY(-4px);
+}
+
+.plan-card.popular {
+    background: var(--gradient-accent);
+    border-color: transparent;
+    box-shadow: 0 24px 80px rgba(255, 107, 53, 0.35);
+    color: #fff;
+}
+
+.plan-card.popular .plan-name,
+.plan-card.popular .plan-price .amount,
+.plan-card.popular .plan-price .currency,
+.plan-card.popular .plan-price .period,
+.plan-card.popular .plan-features li,
+.plan-card.popular .plan-features li i {
+    color: #fff !important;
+}
+
+.plan-card.popular .plan-features li {
+    border-bottom: 1px solid rgba(14, 14, 14, 0.1);
+}
+
+.plan-card.popular .btn-outline-success {
+    background-color: var(--text-inverse) !important;
+    color: var(--accent) !important;
+}
+
+.plan-badge {
+    display: inline-block;
+    background-color: var(--bg-surface-elevated);
+    color: var(--text-main);
+    padding: 8px 16px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 32px;
+}
+
+.plan-card.popular .plan-badge {
+    background-color: var(--text-inverse);
+    color: var(--accent);
+}
+
+.plan-name {
+    font-size: 32px;
+    margin-bottom: 24px;
+}
+
+.plan-price {
+    margin-bottom: 40px;
+    display: flex;
+    align-items:baseline;
+}
+
+.plan-price .currency {
+    font-size: 24px;
+    color: var(--accent);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+}
+
+.plan-price .amount {
+    font-size: 64px;
+    line-height: 1;
+    color: var(--text-main);
+}
+
+.plan-price .period {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin-left: 8px;
+}
+
+.plan-features {
+    list-style: none;
+    margin-bottom: 48px;
+}
+
+.plan-features li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--bg-surface-elevated);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+}
+
+.plan-features li i {
+    color: var(--accent);
+    margin-right: 16px;
+    font-size: 14px;
+}
+
+.plan-features li .fa-times {
+    color: var(--danger);
+    opacity: 0.5;
+}
+
+.plan-card .btn {
+    width: 100%;
+}
+
+/* Trainers Section */
+.trainer-card {
+    background: var(--gradient-card);
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    padding: 48px;
+    height: 100%;
+    text-align: left;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.trainer-card:hover {
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 16px 50px rgba(0, 212, 255, 0.08);
+    transform: translateY(-4px);
+}
+
+.trainer-avatar {
+    font-size: 80px;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 32px;
+}
+
+.trainer-card h5 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.trainer-specialty {
+    color: var(--accent);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.trainer-bio {
+    color: var(--text-muted);
+}
+
+/* BMI Calculator Section */
+.bmi-calculator {
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 107, 53, 0.12);
+    padding: 64px;
+}
+
+.bmi-calculator h3 {
+    font-size: 40px;
+    margin-bottom: 16px;
+}
+
+.bmi-calculator p {
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    font-size: 18px;
+}
+
+.form-label {
+    color: var(--text-main);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.form-control {
+    background-color: var(--bg-surface-elevated) !important;
+    border: 1px solid rgba(255, 107, 53, 0.15) !important;
+    color: var(--text-main) !important;
+    padding: 20px 24px !important;
+    font-size: 16px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+    background-color: #1f2550 !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15) !important;
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.bmi-result {
+    margin-top: 40px;
+    padding: 40px;
+    background-color: var(--accent);
+    color: var(--text-inverse);
+    text-align: left;
+    display: none;
+}
+
+.bmi-result.show {
+    display: block;
+}
+
+.bmi-result h4 {
+    color: var(--text-inverse);
+}
+
+.bmi-result p {
+    color: var(--text-inverse);
+    opacity: 0.8;
+}
+
+.bmi-value {
+    font-size: 64px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 900;
+    margin: 16px 0;
+    line-height: 1;
+}
+
+.bmi-category {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* CTA Section */
+.cta-section {
+    background: var(--gradient-cta);
+    color: #fff;
+    text-align: left;
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    animation: pulse-glow 7s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.cta-section h2 {
+    font-size: clamp(48px, 6vw, 80px);
+    color: #fff;
+    margin-bottom: 24px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.cta-section p {
+    font-size: 24px;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 48px;
+}
+
+.cta-section .btn {
+    background-color: #fff !important;
+    color: var(--accent) !important;
+    font-weight: 700;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+}
+
+.cta-section .btn:hover {
+    background-color: #f0f2ff !important;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 50px rgba(0,0,0,0.3);
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(180deg, var(--bg-surface) 0%, #080a16 100%);
+    border-top: 1px solid rgba(255, 107, 53, 0.1);
+    padding: 80px 0 40px;
+}
+
+.footer h6 {
+    color: var(--text-main);
+    font-size: 20px;
+    margin-bottom: 32px;
+}
+
+.footer p {
+    color: var(--text-muted);
+}
+
+.footer ul {
+    list-style: none;
+}
+
+.footer ul li {
+    margin-bottom: 16px;
+}
+
+.footer ul li a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.2s;
+}
+
+.footer ul li a:hover {
+    color: var(--accent);
+}
+
+.footer-bottom {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--bg-surface);
+    color: var(--text-muted);
+    text-align: left;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .navbar-custom {
+        padding: 16px 0;
+    }
+    .nav-link, .btn-register {
+        margin-left: 0;
+        margin-top: 16px;
+    }
+    .hero-section {
+        padding-top: 120px;
+        padding-bottom: 80px;
+        text-align: left;
+    }
+    .hero-image-box {
+        display: none;
+    }
+    .section-header h2 {
+        font-size: 48px;
+    }
+}

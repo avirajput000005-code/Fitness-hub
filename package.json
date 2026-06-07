@@ -1,0 +1,29 @@
+{
+  "name": "fitness-hub",
+  "version": "1.0.0",
+  "description": "Fitness Hub - Gym & Fitness Management System (Pure JavaScript)",
+  "main": "server-supabase.js",
+  "scripts": {
+    "start": "node server-supabase.js",
+    "server": "node server-supabase.js",
+    "dev": "node server-supabase.js"
+  },
+  "keywords": [
+    "fitness",
+    "gym",
+    "health",
+    "workout",
+    "diet"
+  ],
+  "author": "Fitness Hub",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.101.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": "18.0.0"
+  }
+}
