@@ -675,4 +675,56 @@ h1, h2, h3, h4, h5, h6, .navbar-brand, .plan-price .amount {
     .section-header h2 {
         font-size: 48px;
     }
+    
+    /* Responsive spacing and layout improvements */
+    .features-section, .trainers-section, .plans-section, .bmi-section, .cta-section {
+        padding: 60px 0 !important;
+    }
+    .section-header {
+        margin-bottom: 40px !important;
+    }
+    .feature-card, .plan-card, .trainer-card, .bmi-calculator {
+        padding: 30px 20px !important;
+    }
+    
+    .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .hero-buttons .btn {
+        margin: 0 !important;
+        flex: 1 1 auto;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 36px !important;
+        margin-bottom: 20px !important;
+    }
+    .hero-subtitle {
+        font-size: 16px !important;
+        margin-bottom: 30px !important;
+    }
+    .section-header h2 {
+        font-size: 32px !important;
+    }
+    .section-header p {
+        font-size: 16px !important;
+    }
+    .bmi-calculator h3 {
+        font-size: 28px !important;
+    }
+    .bmi-value {
+        font-size: 48px !important;
+    }
+    .cta-section h2 {
+        font-size: 32px !important;
+    }
+    .cta-section p {
+        font-size: 18px !important;
+    }
 }

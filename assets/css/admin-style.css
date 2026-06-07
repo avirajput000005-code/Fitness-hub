@@ -362,3 +362,51 @@
     color: var(--text-light, #ffffff);
 }
 
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    .admin-header {
+        padding: 20px 15px !important;
+        text-align: center;
+    }
+    .admin-header h2 {
+        font-size: 24px !important;
+    }
+    .admin-section {
+        padding: 15px !important;
+    }
+    .admin-panel {
+        padding: 15px !important;
+    }
+    .panel-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
+    .panel-header div {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .panel-header div button, .panel-header div a {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+    .user-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .user-details {
+        margin-bottom: 10px;
+    }
+    .user-card {
+        padding: 15px !important;
+    }
+    .btn-manage, .btn-manage-success, .btn-manage-danger, .btn-manage-secondary {
+        width: 100%;
+        margin-top: 5px;
+    }
+}
+

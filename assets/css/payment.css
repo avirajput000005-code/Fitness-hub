@@ -68,3 +68,49 @@
 .countdown-timer {
     color: var(--accent);
 }
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .pay-header {
+        padding: 15px 20px !important;
+    }
+    .pay-header .logo {
+        font-size: 18px !important;
+    }
+    .pay-main {
+        padding: 20px 15px !important;
+        gap: 20px !important;
+    }
+    .order-card, .payment-card {
+        padding: 20px 15px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .pay-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        text-align: center;
+    }
+    .pay-header .steps span {
+        display: none !important; /* Hide step labels on mobile to prevent overflow */
+    }
+    .step-sep {
+        width: 16px !important; /* Shorter separator line */
+    }
+    .pay-header .steps {
+        gap: 4px !important;
+    }
+    .method-tabs {
+        flex-wrap: wrap;
+        gap: 6px !important;
+    }
+    .method-tab {
+        flex: 1 1 45% !important; /* Stacks 2 per row */
+        padding: 10px 6px !important;
+    }
+    .bank-grid {
+        grid-template-columns: repeat(2, 1fr) !important; /* 2 banks per row on mobile */
+    }
+}

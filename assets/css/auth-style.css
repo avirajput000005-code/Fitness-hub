@@ -377,6 +377,34 @@
     .login-right { padding: 2rem; }
 }
 
+@media (max-width: 576px) {
+    .auth-container {
+        padding: 80px 15px 15px 15px !important;
+    }
+    .auth-card {
+        padding: 1.5rem !important;
+        box-shadow: 8px 8px 0px var(--accent) !important;
+    }
+    .auth-card h2, .login-header h2 {
+        font-size: 1.8rem !important;
+    }
+    .login-wrapper {
+        box-shadow: 8px 8px 0px var(--accent) !important;
+        border: 2px solid var(--border-color) !important;
+    }
+    .floating-back-btn {
+        position: static !important;
+        margin-bottom: 15px !important;
+        width: 100%;
+        justify-content: center;
+    }
+    .remember-forgot {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
 /* ─── Utility helpers (replaces inline styles) ─── */
 
 /* JS-toggled hidden step (display:none) */
