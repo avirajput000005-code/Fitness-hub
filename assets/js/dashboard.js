@@ -43,10 +43,84 @@ window.dashboardState = {
     isInitialized: false
 };
 
+async function syncGoogleSession() {
+    if (typeof supabase === 'undefined') return;
+    try {
+        // Fetch Supabase configuration values dynamically
+        const res = await fetch('/api/config');
+        const config = await res.json();
+        if (!config.supabaseUrl || !config.supabaseKey) return;
+        
+        const client = supabase.createClient(config.supabaseUrl, config.supabaseKey);
+        
+        // Check if a session exists (handles parses from URL hash after redirect)
+        const { data: { session }, error } = await client.auth.getSession();
+        if (error) throw error;
+        
+        if (session && session.user) {
+            const googleEmail = session.user.email;
+            const googleName = session.user.user_metadata?.full_name || session.user.user_metadata?.name || googleEmail.split('@')[0];
+            
+            console.log('🔗 Found active Supabase OAuth session for:', googleEmail);
+            
+            // Check if this user exists in our local Express backend database
+            const profileResponse = await apiGetProfile(googleEmail);
+            
+            if (profileResponse.success && profileResponse.user) {
+                // User already registered - establish local session
+                localStorage.setItem('fitnesshub_session', JSON.stringify({
+                    email: googleEmail,
+                    loginTime: new Date().toISOString(),
+                    rememberMe: true,
+                    otpVerified: true
+                }));
+            } else {
+                // User does not exist in our custom public users table yet - automatically register them
+                console.log('🆕 Google User registering. Creating user record...');
+                
+                const registerResult = await apiRegisterUser({
+                    email: googleEmail,
+                    name: googleName,
+                    password: 'oauth-google-login-placeholder-' + Math.random().toString(36).substring(7),
+                    phone: '',
+                    age: 25, // Default placeholder values
+                    gender: 'male',
+                    height: 175,
+                    weight: 70,
+                    fitnessGoal: 'general_fitness',
+                    experience: 'beginner'
+                });
+                
+                if (registerResult.success) {
+                    console.log('✅ Registered new Google user successfully');
+                    
+                    // Create pending membership automatically
+                    await apiCreateMembership(googleEmail, 'Starter Pack', 999, 30);
+                    
+                    // Set session
+                    localStorage.setItem('fitnesshub_session', JSON.stringify({
+                        email: googleEmail,
+                        loginTime: new Date().toISOString(),
+                        rememberMe: true,
+                        otpVerified: true
+                    }));
+                } else {
+                    console.error('❌ Failed to register Google user in users table:', registerResult.error);
+                }
+            }
+        }
+    } catch (e) {
+        console.error('⚠️ Google session sync error:', e.message);
+    }
+}
+
 // Initialize Dashboard
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         console.log('🚀 Initializing dashboard...');
+        
+        // Sync Google session if redirecting from OAuth
+        await syncGoogleSession();
         
         // Check for session locally (offline-first)
         const session = localStorage.getItem('fitnesshub_session');

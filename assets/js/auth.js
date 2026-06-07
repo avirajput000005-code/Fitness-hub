@@ -7,6 +7,47 @@ let selectedPlan = null;
 let userFormData = {};
 let otpTimerInterval = null;
 let resetOtpTimerInterval = null;
+let clientSupabase = null;
+
+async function getSupabaseClient() {
+    if (clientSupabase) return clientSupabase;
+    try {
+        const baseUrl = window.location.origin;
+        const res = await fetch(`${baseUrl}/api/config`);
+        const config = await res.json();
+        if (config.supabaseUrl && config.supabaseKey && typeof supabase !== 'undefined') {
+            clientSupabase = supabase.createClient(config.supabaseUrl, config.supabaseKey);
+            return clientSupabase;
+        }
+    } catch (e) {
+        console.error('Failed to initialize Supabase client:', e);
+    }
+    return null;
+}
+
+async function signInWithGoogle() {
+    try {
+        const client = await getSupabaseClient();
+        if (!client) {
+            showAlert('Supabase client failed to initialize. Please check your DB configuration.', 'error');
+            return;
+        }
+        
+        const { error } = await client.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: window.location.origin + '/pages/dashboard.html'
+            }
+        });
+        
+        if (error) {
+            throw error;
+        }
+    } catch (e) {
+        console.error('Google Sign-In Error:', e);
+        showAlert('Google Login failed: ' + e.message, 'error');
+    }
+}
 
 // ─── STORAGE KEYS ───────────────────────────────────────────
 const KEY_SESSION    = 'fitnesshub_session';
