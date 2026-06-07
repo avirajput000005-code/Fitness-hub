@@ -959,6 +959,56 @@ function getAIWorkoutSuggestion(goal, experience) {
     return suggestions[goal]?.[experience] || suggestions.weight_loss.beginner;
 }
 
+function checkGoogleQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    const googleEmail = params.get('google_email');
+    const googleName = params.get('google_name');
+    
+    if (googleEmail && googleName) {
+        console.log('📝 Found Google OAuth registration params:', googleEmail, googleName);
+        
+        // 1. Pre-fill name and email
+        const fullNameInput = document.getElementById('fullName');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        
+        if (fullNameInput) fullNameInput.value = googleName;
+        if (emailInput) {
+            emailInput.value = googleEmail;
+            emailInput.readOnly = true;
+        }
+        if (phoneInput) {
+            phoneInput.value = '0000000000'; // Pre-fill placeholder phone
+        }
+        
+        // 2. Generate secure random password and hide fields
+        const randomPass = 'GoogleAuth_' + Math.random().toString(36).substring(2, 15) + '1a!';
+        const pwdInput = document.getElementById('password');
+        const confirmPwdInput = document.getElementById('confirmPassword');
+        
+        if (pwdInput) {
+            pwdInput.value = randomPass;
+            const parent = pwdInput.closest('.mb-3');
+            if (parent) parent.style.display = 'none';
+        }
+        if (confirmPwdInput) {
+            confirmPwdInput.value = randomPass;
+            const parent = confirmPwdInput.closest('.mb-3');
+            if (parent) parent.style.display = 'none';
+        }
+        
+        // 3. Save Step 1 data
+        saveStepData(1);
+        
+        // 4. Move to Step 2
+        currentStep = 2;
+        updateFormView();
+        
+        // 5. Show welcoming success alert
+        showAlert(`Welcome ${googleName}! Google account authenticated. Please complete your fitness profile to continue.`, 'success');
+    }
+}
+
 // ============================================
 // CARD INPUT FORMATTING
 // ============================================
@@ -994,6 +1044,9 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('input').forEach(i => { i.value = ''; });
             document.querySelectorAll('select').forEach(s => { s.selectedIndex = 0; });
             document.getElementById('fullName')?.focus();
+            
+            // Check Google Query Params here
+            checkGoogleQueryParams();
         }, 50);
     }
 
